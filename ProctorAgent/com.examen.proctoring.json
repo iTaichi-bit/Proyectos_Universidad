@@ -1,0 +1,9 @@
+{
+  "name": "com.examen.proctoring",
+  "description": "Agente de Proctoring para Examen Seguro",
+  "path": "C:\\ProctorAgent\\run_agent.bat",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://dkoapjjnbnhkefaldbmmobfgibepjjja/"
+  ]
+}

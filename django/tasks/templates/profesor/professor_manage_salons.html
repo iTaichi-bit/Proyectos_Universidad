@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Mis Salones</h2>
+        <a href="{% url 'professor_create_salon' %}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nuevo Salón
+        </a>
+    </div>
+
+    {% if lista_salones %}
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Nombre del Salón</th>
+                        <th>Curso Asociado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for salon in lista_salones %}
+                    <tr>
+                        <td>{{ salon.nombre_salon }}</td>
+                        <td>{{ salon.id_curso.nombre_curso }}</td>
+                        <td style="width: 280px;"> <a href="{% url 'professor_manage_salon_students' salon.id_salon %}" class="btn btn-sm btn-info text-white" title="Gestionar Alumnos">
+                                <i class="bi bi-people"></i> Alumnos
+                            </a>
+
+                            <a href="{% url 'professor_edit_salon' salon.id_salon %}" class="btn btn-sm btn-warning">Editar</a>
+                            <a href="{% url 'professor_delete_salon' salon.id_salon %}" class="btn btn-sm btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+            </table>
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            No has creado ningún salón todavía.
+        </div>
+    {% endif %}
+    
+    <a href="{% url 'professor_dashboard' %}" class="btn btn-secondary mt-3">Volver al Dashboard</a>
+</div>
+{% endblock %}

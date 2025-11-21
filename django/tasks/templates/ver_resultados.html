@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Resultados: {{ examen.titulo }}</h2>
+        <h3 class="text-primary">Tu Nota: {{ nota }}</h3>
+    </div>
+
+    {% for item in resultados %}
+    <div class="card mb-4">
+        <div class="card-header">
+            <strong>{{ forloop.counter }}. {{ item.pregunta.texto_pregunta }}</strong>
+        </div>
+        <ul class="list-group list-group-flush">
+            {% for alt in item.alternativas %}
+                {% if alt.valor == 'C' %}
+                    <li class="list-group-item list-group-item-success">
+                        <i class="bi bi-check-circle-fill"></i> {{ alt.texto_alternativa }} 
+                        <span class="badge bg-success float-end">Correcta</span>
+                    </li>
+                {% elif alt.id_alternativas_examen == item.seleccionada_id %}
+                    <li class="list-group-item list-group-item-danger">
+                        <i class="bi bi-x-circle-fill"></i> {{ alt.texto_alternativa }}
+                        <span class="badge bg-danger float-end">Tu elección</span>
+                    </li>
+                {% else %}
+                    <li class="list-group-item">
+                        <i class="bi bi-circle"></i> {{ alt.texto_alternativa }}
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+
+    <div class="text-center mb-5">
+        <a href="{% url 'exam_dashboard' %}" class="btn btn-primary">Volver al Panel</a>
+    </div>
+</div>
+{% endblock %}
